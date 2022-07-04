@@ -7,9 +7,9 @@ module.exports.insertOne = async (classInput) => {
     return result;
 }
 
-module.exports.updateOne = async (classInput) => {
+module.exports.updateOne = async (id, classInput) => {
     const oneClass = { ...classInput};
-    const result = await classService.updateOne(oneClass);
+    const result = await classService.updateOne({ _id: id }, oneClass);
     console.log(result);
     return result;
 }

@@ -7,6 +7,7 @@ module.exports.findAll = async (req, res) => {
 
 module.exports.findOne = async (req, res) => {
     const id = req.params.id;
+    console.log("Id " + id);
     const oneClass = await classService.findOne(id);
     res.json(oneClass)
 }
@@ -23,6 +24,8 @@ module.exports.deleteOne = async (req, res) => {
 }
 
 module.exports.updateOne = async (req, res) => {
-    const oneClass = await classService.updateOne(req.body);
+    const id = req.params.id;
+    console.log("Update " + req.body);
+    const oneClass = await classService.updateOne(id, req.body);
     res.json(oneClass);
 }
