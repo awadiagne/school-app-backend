@@ -16,8 +16,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-mongoose.connect("mongodb+srv://schooladmin:Passer123@maincluster.sjkpnzc.mongodb.net/schoolapp?retryWrites=true&w=majority")
-//mongoose.connect(DB_URL)
+mongoose.connect(DB_URL)
 .then(result => {
     console.log("Connection established with MongoDB");
     initApp();
@@ -41,8 +40,8 @@ function initApp(){
         if (routes[i].indexOf('routes') !== -1 && routes[i].indexOf('public.routes') === -1)
             require(routes[i])(app);
 
-    app.listen(4002, () => {
-        console.log('Server Listening on ' + 4002);
+    app.listen(PORT, () => {
+        console.log('Server Listening on ' + PORT);
     })
 
 }
