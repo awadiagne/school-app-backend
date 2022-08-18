@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors')
+const bodyParser = require('body-parser');
 
 require('dotenv').config();
 const Files = require('edacy-files-walk');
@@ -11,8 +12,12 @@ const { PORT, DB_URL } = process.env;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
-mongoose.connect(DB_URL)
+mongoose.connect("mongodb+srv://schooladmin:Passer123@maincluster.sjkpnzc.mongodb.net/schoolapp?retryWrites=true&w=majority")
+//mongoose.connect(DB_URL)
 .then(result => {
     console.log("Connection established with MongoDB");
     initApp();
@@ -36,8 +41,8 @@ function initApp(){
         if (routes[i].indexOf('routes') !== -1 && routes[i].indexOf('public.routes') === -1)
             require(routes[i])(app);
 
-    app.listen(PORT, () => {
-        console.log('Server Listening on ' + PORT);
+    app.listen(4002, () => {
+        console.log('Server Listening on ' + 4002);
     })
 
 }

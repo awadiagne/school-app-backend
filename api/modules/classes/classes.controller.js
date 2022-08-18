@@ -2,19 +2,34 @@ const classService = require('./classes.service');
 
 module.exports.findAll = async (req, res) => {
     const result = await classService.findAll();
-    res.send(result);
+
+    if(!result) {
+        res.status(404).send( { error : "Classes not found!" });
+    } else {
+        res.json(result);
+    }
 }
 
 module.exports.findOne = async (req, res) => {
     const id = req.params.id;
     console.log("Id " + id);
     const oneClass = await classService.findOne(id);
-    res.json(oneClass)
+    
+    if(!oneClass) {
+        res.status(404).send({ error :"Class not found!" });
+    } else {
+        res.json(oneClass);
+    }
 }
 
 module.exports.insertOne = async (req, res) => {
     const oneClass = await classService.insertOne(req.body);
-    res.json(oneClass);
+    
+    if(!oneClass) {
+        res.status(503).send({ error :"Class not inserted"});
+    } else {
+        res.status(201).send(oneClass);
+    }
 }
 
 module.exports.deleteOne = async (req, res) => {
@@ -25,7 +40,12 @@ module.exports.deleteOne = async (req, res) => {
 
 module.exports.updateOne = async (req, res) => {
     const id = req.params.id;
-    console.log("Update " + req.body);
+    console.log("Update " + { body : req.body });
     const oneClass = await classService.updateOne(id, req.body);
-    res.json(oneClass);
+    
+    if(!oneClass) {
+        res.status(404).send({ error :"Class not found!" });
+    } else {
+        res.json(oneClass);
+    }
 }
