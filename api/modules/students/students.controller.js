@@ -23,6 +23,14 @@ module.exports.deleteOne = async (req, res) => {
 }
 
 module.exports.updateOne = async (req, res) => {
-    const student = await studentService.updateOne(req.body);
-    res.json(student);
+
+    const id = req.params.id;
+    console.log("Update " + req.body._id);
+    const student = await studentService.updateOne(id, req.body);
+    
+    if(!student) {
+        res.status(404).send({ error :"Student not found!" });
+    } else {
+        res.json(student);
+    }
 }

@@ -2,9 +2,9 @@ const Mongoose = require('mongoose');
 
 const studentSchema = new Mongoose.Schema({
     name : { type : String },
-    classID : { 
+    classe : { 
         type: Mongoose.SchemaTypes.ObjectId,
-        ref : "Classe", 
+        ref : "classes", 
     }, 
 });
 

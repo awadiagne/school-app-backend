@@ -1,4 +1,5 @@
 const classService = require('./classes.schema');
+const Student = require('../students/students.schema');
 
 module.exports.insertOne = async (classInput) => {
     const oneClass = { ...classInput};
@@ -23,5 +24,6 @@ module.exports.findAll = async () => {
 }
 
 module.exports.deleteOne = async (id) => {
+    await Student.deleteMany({classe : id});
     return await classService.deleteOne({_id : id});
 }

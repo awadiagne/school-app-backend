@@ -7,6 +7,6 @@ module.exports = (app) => {
 
     app.route('/students/:id')
     .get(Ctrl.findOne)
-    .post(Ctrl.updateOne)
+    .put(Ctrl.updateOne)
     .delete(Ctrl.deleteOne)
 }
